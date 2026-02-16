@@ -1,0 +1,110 @@
+.heritage {
+  background: #4e1400; /* Darker brown like image */
+  padding: 100px 10%;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heritage-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+  width: 100%;
+}
+
+/* ===========================
+   GOLD FRAME DESIGN
+=========================== */
+.heritage-image-wrapper {
+  position: relative;
+  padding: 20px;
+}
+
+.gold-frame {
+  position: relative;
+  border: 1px solid #d9b06f; /* Outer line */
+  padding: 15px;
+  display: inline-block;
+}
+
+/* Artistic corners like the image */
+.gold-frame::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 20px;
+  background: #4e1400;
+  border: 1px solid #d9b06f;
+  z-index: 2;
+}
+
+.gold-frame img {
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  filter: grayscale(100%);
+  display: block;
+  outline: 1px solid #d9b06f;
+  outline-offset: -10px;
+}
+
+.since-text {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  font-family: 'Dancing Script', cursive; /* Use a script font */
+  color: #d9b06f;
+  font-size: 20px;
+}
+
+/* ===========================
+   CONTENT STYLING
+=========================== */
+.heritage-content {
+  max-width: 500px;
+}
+
+.script-title {
+  font-family: 'Dancing Script', cursive; /* Script font like image */
+  font-size: 48px;
+  color: #fff;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.heritage-content p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #fce4c4; /* Creamy color for readability */
+  margin-bottom: 30px;
+}
+
+.story-btn {
+  padding: 14px 40px;
+  background: #ff7a3d;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.story-btn:hover {
+  background: #e66a30;
+}
+
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+  .heritage-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 50px;
+  }
+}

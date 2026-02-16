@@ -1,0 +1,25 @@
+.add-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-row input {
+  padding: 10px;
+  flex: 1;
+}
+
+.add-row button {
+  background: #6b1d00;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  padding: 12px;
+  margin-bottom: 10px;
+}

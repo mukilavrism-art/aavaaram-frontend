@@ -1,0 +1,85 @@
+.sweet-legacy {
+  padding: 90px 60px;
+  background: #f7f6f2;
+}
+
+/* HEADER */
+.sweet-header {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 60px;
+}
+
+.legacy-sub {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: #777;
+  margin-bottom: 8px;
+}
+
+.sweet-header h2 {
+  font-size: 36px;
+  color: #2b2b2b;
+  margin-bottom: 14px;
+}
+
+.sweet-header p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* JOURNEY ROW */
+.journey-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+  
+}
+
+/* ITEM */
+.journey-item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.journey-img {
+  width: 180px;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.journey-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* TITLE */
+.journey-item h4 {
+  font-size: 14px;
+  text-align: center;
+  color: #2b2b2b;
+  margin-top: 10px;
+}
+
+/* ARROW */
+.arrow {
+  font-size: 22px;
+  color: #999;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .journey-row {
+    flex-direction: column;
+  }
+
+  .arrow {
+    transform: rotate(90deg);
+  }
+}

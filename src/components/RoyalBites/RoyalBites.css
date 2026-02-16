@@ -1,0 +1,175 @@
+/* ===============================
+   SECTION
+================================ */
+
+.royal {
+  padding: 90px 60px;
+  background: #f6f6f6;
+}
+
+/* HEADER */
+.royal-header {
+  text-align: center;
+  margin-bottom: 55px;
+}
+
+.royal-header h2 {
+  font-size: 44px;
+  color: #ff7a3d;
+  font-family: "Playfair Display", serif;
+}
+
+.royal-header p {
+  font-size: 18px;
+  color: #444;
+  margin-top: 10px;
+}
+
+/* ===============================
+   ROW LAYOUT
+================================ */
+
+.royal-row {
+  display: flex;
+  gap: 40px;
+  align-items: stretch;
+}
+
+/* ===============================
+   LEFT CATEGORY CARD
+================================ */
+
+.royal-category {
+  position: relative;
+  min-width: 320px;
+  height: 420px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.royal-category img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.category-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.category-overlay h3 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.category-overlay p {
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+.category-overlay button {
+  align-self: flex-start;
+  padding: 10px 26px;
+  background: #fff;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ===============================
+   SLIDER
+================================ */
+
+.royal-slider {
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.royal-slider::-webkit-scrollbar {
+  height: 6px;
+}
+
+.royal-slider::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+/* ===============================
+   PRODUCT CARD
+================================ */
+
+.royal-card {
+  min-width: 240px;
+  background: #fff;
+}
+
+.royal-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.royal-card h4 {
+  margin: 14px 0 6px;
+  font-size: 16px;
+  color: #5b2b00;
+}
+
+.rating {
+  color: #ff7a3d;
+  font-size: 14px;
+}
+
+.rating span {
+  color: #666;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+.price {
+  margin: 6px 0 12px;
+  font-weight: 600;
+}
+
+.royal-card button {
+  width: 100%;
+  padding: 12px;
+  background: #6b1d00;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1024px) {
+  .royal-row {
+    flex-direction: column;
+  }
+
+  .royal-category {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .royal {
+    padding: 60px 20px;
+  }
+
+  .royal-header h2 {
+    font-size: 34px;
+  }
+}

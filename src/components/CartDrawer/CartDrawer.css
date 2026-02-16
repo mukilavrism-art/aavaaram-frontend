@@ -1,0 +1,61 @@
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 999;
+}
+
+.drawer {
+  width: 380px;
+  background: #fff;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.drawer-items {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.drawer-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.drawer-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.qty button {
+  padding: 2px 8px;
+}
+
+.drawer-footer {
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.drawer-footer button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.checkout {
+  background: black;
+  color: white;
+}

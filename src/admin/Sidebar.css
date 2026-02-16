@@ -1,0 +1,30 @@
+.sidebar {
+  width: 240px;
+  background: #ffffff;
+  padding: 20px;
+  border-right: 1px solid #eee;
+}
+
+.sidebar .logo {
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 12px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.sidebar a.active {
+  background: #eef5ff;
+  color: #0066ff;
+}
+.sidebar .logo {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+}

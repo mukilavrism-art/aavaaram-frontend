@@ -1,0 +1,57 @@
+.profile-wrapper {
+  position: relative;
+}
+
+.profile-icon {
+  cursor: pointer;
+}
+
+.login-popup {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  width: 260px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  z-index: 999;
+}
+
+.login-popup h4 {
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.login-popup input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.login-popup button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.login-popup button:hover {
+  opacity: 0.9;
+}
+
+.admin-btn {
+  background: #6b1d00;
+  color: #fff;
+}
+
+.logout-btn {
+  background: #e74c3c;
+  color: #fff;
+}

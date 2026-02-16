@@ -1,0 +1,182 @@
+/* ===============================
+   SECTION
+================================ */
+
+.timeless {
+  background: linear-gradient(
+    90deg,
+    #e6bf8f 0%,
+    #e6bf8f 68%,
+    #f7ecdd 68%,
+    #f7ecdd 10%
+  );
+  padding: 10px 80px;
+}
+
+/* ===============================
+   INNER LAYOUT
+================================ */
+
+.timeless-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px;
+}
+
+/* ===============================
+   LEFT CONTENT
+================================ */
+
+.timeless-left {
+  max-width: 460px;
+}
+
+.timeless-left h2 {
+  font-size: 52px;
+  font-family: "Playfair Display", serif;
+  font-weight: 500;
+  color: #5b2b00;
+  margin-bottom: 18px;
+}
+
+.timeless-left p {
+  font-size: 22px;
+  line-height: 1.6;
+  color: #5b2b00;
+  margin-bottom: 36px;
+}
+
+.timeless-left button {
+  padding: 14px 38px;
+  background: transparent;
+  border: 2px solid #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.timeless-left button:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* ===============================
+   RIGHT CONTENT
+================================ */
+
+.timeless-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* BIG IMAGE BOX */
+.video-box {
+  position: relative;
+  width: 420px;
+  height: 420px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
+}
+
+.video-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* PLAY BUTTON */
+.play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 46px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.video-box:hover .play-btn {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* SMALL OVERLAP IMAGE (1914 CARD) */
+.badge-box {
+  position: absolute;
+  right: -120px;
+  bottom: 40px;
+  width: 220px;
+  height: 150px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.25);
+}
+
+.badge-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1024px) {
+  .timeless {
+    padding: 90px 40px;
+  }
+
+  .timeless-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 50px;
+  }
+
+  .timeless-right {
+    width: 100%;
+  }
+
+  .video-box {
+    width: 100%;
+    height: 360px;
+  }
+
+  .badge-box {
+    right: 20px;
+    bottom: -60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .timeless {
+    padding: 70px 20px;
+  }
+
+  .timeless-left h2 {
+    font-size: 40px;
+  }
+
+  .timeless-left p {
+    font-size: 18px;
+  }
+
+  .video-box {
+    height: 280px;
+  }
+
+  .badge-box {
+    width: 180px;
+    height: 120px;
+    right: 10px;
+    bottom: -50px;
+  }
+}

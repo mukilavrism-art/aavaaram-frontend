@@ -1,0 +1,43 @@
+/* FULL WIDTH WRAPPER */
+.home-banner {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* DESKTOP */
+.home-banner-img {
+  width: 100%;
+  height: 520px;   /* 🔥 INCREASED */
+  object-fit: cover;
+  display: block;
+}
+
+/* LAPTOP */
+@media (max-width: 1200px) {
+  .home-banner-img {
+    height: 450px;
+  }
+}
+
+/* TABLET */
+@media (max-width: 992px) {
+  .home-banner-img {
+    height: 380px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .home-banner-img {
+    height: 300px;   /* 🔥 MOBILE-LA BIG */
+  }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+  .home-banner-img {
+    height: 260px;
+  }
+}
