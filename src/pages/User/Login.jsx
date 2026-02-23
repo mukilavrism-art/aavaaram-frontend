@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 
 export default function Login() {
+
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -21,36 +24,70 @@ export default function Login() {
     e.preventDefault();
 
     try {
+      setLoading(true);
+
       const res = await api.post("/auth/login", form);
 
+      // ✅ Save token
       localStorage.setItem("token", res.data.token);
-      localStorage.setItem("role", res.data.role);
+
+      alert("Login successful ✅");
 
       navigate("/");
+
     } catch (err) {
-      alert(err.response?.data?.error || "Login failed");
+      console.log(err);
+      alert(
+        err.response?.data?.error ||
+        "Invalid email or password ❌"
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        name="email"
-        placeholder="Enter email"
-        onChange={handleChange}
-        required
-      />
+    <div style={{ maxWidth: "400px", margin: "100px auto" }}>
+      <h2>Login</h2>
 
-      <input
-        type="password"
-        name="password"
-        placeholder="Enter password"
-        onChange={handleChange}
-        required
-      />
+      <form onSubmit={handleSubmit}>
 
-      <button type="submit">Login</button>
-    </form>
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter email"
+          value={form.email}
+          onChange={handleChange}
+          required
+          style={{ width: "100%", marginBottom: "15px", padding: "10px" }}
+        />
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter password"
+          value={form.password}
+          onChange={handleChange}
+          required
+          style={{ width: "100%", marginBottom: "15px", padding: "10px" }}
+        />
+
+        <button
+          type="submit"
+          disabled={loading}
+          style={{
+            width: "100%",
+            padding: "10px",
+            background: "#6b1d00",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer"
+          }}
+        >
+          {loading ? "Logging in..." : "Login"}
+        </button>
+
+      </form>
+    </div>
   );
 }

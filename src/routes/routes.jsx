@@ -36,6 +36,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import UserLayout from "../layouts/UserLayout";
 import AboutUs from "../components/AboutUs/AboutUs";
 import Search from "../pages/Search/Search";
+import Contact from "../pages/Contact/Contact";
 
 export default function AppRoutes() {
   return (
@@ -57,6 +58,7 @@ export default function AppRoutes() {
         <Route path="/my-orders" element={<MyOrders />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/contact" element={<Contact />} />
 
       </Route>
 

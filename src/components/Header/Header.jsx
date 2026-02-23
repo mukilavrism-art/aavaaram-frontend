@@ -145,7 +145,7 @@ export default function Header() {
 
           {/* <span>B2B</span>
           <span>Blog</span> */}
-          <span>Contact</span>
+              <span onClick={() => navigate("/contact")}>Contact</span>
         </nav>
 
         {/* ICONS */}

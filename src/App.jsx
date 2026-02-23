@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+// import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import AppRoutes from "./routes/routes";
 import { CartProvider } from "./context/CartContext";
@@ -9,7 +9,7 @@ import { UserProvider } from "./context/UserContext";
 
 export default function App() {
   return (
-    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+    
       <CartProvider>
         <WishlistProvider>
           
@@ -22,6 +22,6 @@ export default function App() {
           </UserProvider>
         </WishlistProvider>
       </CartProvider>
-    </GoogleOAuthProvider>
+    
   );
 }
