@@ -1,122 +1,201 @@
-/* HERO */
-.contact-hero {
-  background: #dfe6d5;
-  padding: 60px 80px;
-}
-
-.contact-hero h1 {
-  font-size: 42px;
-  color: #1f4f2b;
-}
-
-.contact-hero p {
-  margin-top: 10px;
-  color: #555;
-}
-
-/* MAIN BACKGROUND */
-.contact-page {
-  background: #1b1b1b;
-  color: #fff;
-}
-
-/* CONTAINER */
-.contact-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 60px;
-  padding: 80px;
-  background-image: url("/images/soil-texture.jpg"); /* optional */
-  background-size: cover;
-}
-
-/* FORM */
-.contact-form {
-  width: 45%;
+.contact-wrapper {
+  background: #e6cfd0;
+  padding: 120px 20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-.contact-form label {
-  margin: 15px 0 5px;
-  font-size: 14px;
+/* CARD */
+.contact-card {
+  width: 1000px;
+  display: flex;
+  background: #f5f5f5;
+  border-radius: 12px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+  overflow: hidden;
+  margin-bottom: 60px;
 }
 
-.contact-form input,
-.contact-form textarea {
-  padding: 10px;
-  border: none;
-  outline: none;
-  border-radius: 4px;
+/* LEFT RED PANEL */
+.contact-left {
+  width: 40%;
+  background: linear-gradient(135deg, #e63946, #d62828);
+  color: white;
+  padding: 60px 40px;
 }
 
-.contact-form button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background: #a5c63b;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
+.contact-left h3 {
+  font-size: 24px;
+  margin-bottom: 30px;
 }
 
-/* DETAILS */
-.contact-details {
-  width: 45%;
-}
-
-.contact-details h4 {
-  margin-bottom: 10px;
-  color: #fff;
-}
-
-.contact-details h5 {
-  margin-top: 20px;
-  color: #a5c63b;
-}
-
-.contact-details p {
+.contact-left p {
+  margin-bottom: 18px;
   font-size: 14px;
   line-height: 1.6;
 }
 
-.highlight {
-  color: #a5c63b;
-  font-weight: bold;
+.contact-left hr {
+  margin: 25px 0;
+  border: 0.5px solid rgba(255,255,255,0.3);
 }
 
-/* MAP */
+/* RIGHT WHITE PANEL */
+.contact-right {
+  width: 60%;
+  padding: 60px 50px;
+}
+
+.contact-right h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.contact-right p {
+  margin-bottom: 30px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* FORM */
+.contact-right form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-right input,
+.contact-right textarea {
+  margin-bottom: 20px;
+  padding: 14px;
+  border: none;
+  background: #eaeaea;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+}
+
+.contact-right button {
+  width: 140px;
+  padding: 12px;
+  border: none;
+  background: #e63946;
+  color: white;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-right button:hover {
+  background: #f05a67;
+}
+
+/* MAP SECTION */
 .map-section {
+  width: 1000px;
   display: flex;
   gap: 20px;
-  padding: 40px 80px;
-  background: #1b1b1b;
 }
 
 .map-section iframe {
   width: 50%;
   height: 300px;
+  border-radius: 8px;
   border: none;
 }
 
 /* RESPONSIVE */
-@media (max-width: 768px) {
+/* ==============================
+   RESPONSIVE - TABLET & MOBILE
+=================================*/
 
-  .contact-container {
-    flex-direction: column;
-    padding: 40px 20px;
+@media (max-width: 1024px) {
+  .contact-card,
+  .map-section {
+    width: 90%;
+  }
+}
+
+@media (max-width: 900px) {
+
+  .contact-wrapper {
+    padding: 60px 15px;
   }
 
-  .contact-form,
-  .contact-details {
+  .contact-card {
+    flex-direction: column;
     width: 100%;
+    border-radius: 10px;
+  }
+
+  .contact-left,
+  .contact-right {
+    width: 100%;
+    padding: 40px 25px;
+  }
+
+  .contact-left h3 {
+    font-size: 20px;
+  }
+
+  .contact-right h2 {
+    font-size: 22px;
+  }
+
+  .contact-right p {
+    font-size: 13px;
+  }
+
+  .contact-right input,
+  .contact-right textarea {
+    font-size: 13px;
+    padding: 12px;
+  }
+
+  .contact-right button {
+    width: 100%;
+    border-radius: 30px;
   }
 
   .map-section {
     flex-direction: column;
-    padding: 20px;
+    width: 100%;
+    gap: 15px;
   }
 
   .map-section iframe {
     width: 100%;
+    height: 250px;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 480px) {
+
+  .contact-left {
+    padding: 30px 20px;
+  }
+
+  .contact-right {
+    padding: 30px 20px;
+  }
+
+  .contact-right h2 {
+    font-size: 20px;
+  }
+
+  .contact-left h3 {
+    font-size: 18px;
+  }
+
+  .contact-right input,
+  .contact-right textarea {
+    padding: 10px;
+  }
+
+  .map-section iframe {
+    height: 220px;
   }
 }

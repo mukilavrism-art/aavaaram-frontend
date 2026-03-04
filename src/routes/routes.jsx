@@ -37,6 +37,7 @@ import UserLayout from "../layouts/UserLayout";
 import AboutUs from "../components/AboutUs/AboutUs";
 import Search from "../pages/Search/Search";
 import Contact from "../pages/Contact/Contact";
+import BookingHistory from "../pages/BookingHistory/BookingHistory";
 
 export default function AppRoutes() {
   return (
@@ -59,6 +60,7 @@ export default function AppRoutes() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/search" element={<Search />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/user-histor" element={<BookingHistory />} />
 
       </Route>
 

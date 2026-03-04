@@ -146,3 +146,37 @@
   border-radius: 6px;
   cursor: pointer;
 }
+/* THREE DOT BUTTON */
+.three-dot-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* DROPDOWN */
+.action-dropdown {
+  position: absolute;
+  right: 0;
+  top: 30px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  width: 120px;
+  padding: 6px 0;
+  z-index: 100;
+}
+
+.action-dropdown p {
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.action-dropdown p:hover {
+  background: #f3f4f6;
+}
+
+.delete-text {
+  color: #ef4444;
+}

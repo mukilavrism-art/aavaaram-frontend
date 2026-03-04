@@ -230,12 +230,14 @@
 
   .row {
     flex-direction: column;
+    display: block;
     gap: 0;
     margin-right: 30 px;
   }
 
   .row input {
     width: 95%;
+    display: block;
   }
 
   .payment-container {
@@ -266,4 +268,15 @@
     margin-top: 20px;
   }
 
+}
+/* FORCE DELIVERY INPUTS VERTICAL */
+
+.checkout-left .row {
+  display: block !important;
+}
+
+.checkout-left .row input {
+  width: 100% !important;
+  display: block;
+  margin-bottom: 14px;
 }

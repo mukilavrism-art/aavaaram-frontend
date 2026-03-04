@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "../../context/CartContext";
 import API from "../../services/api";
 import { useNavigate } from "react-router-dom";
@@ -22,10 +22,25 @@ export default function Checkout() {
     phone: ""
   });
 
+  // ✅ LOGIN PROTECTION
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!token || !user) {
+      navigate("/login");
+    } else {
+      // 🔥 Auto-fill email from login user
+      setForm(prev => ({
+        ...prev,
+        email: user.email
+      }));
+    }
+  }, [navigate]);
+
   const validate = () => {
     let newErrors = {};
 
-    if (!form.email) newErrors.email = "Enter an email";
     if (!form.lastName) newErrors.lastName = "Enter a last name";
     if (!form.address) newErrors.address = "Enter an address";
     if (!form.city) newErrors.city = "Enter a city";
@@ -43,6 +58,8 @@ export default function Checkout() {
   const handlePlaceOrder = async () => {
     if (!validate()) return;
 
+    const loggedUser = JSON.parse(localStorage.getItem("user"));
+
     const orderData = {
       items: cart.map(item => ({
         productId: item._id,
@@ -52,65 +69,61 @@ export default function Checkout() {
         image: item.image
       })),
       totalAmount: total,
-      customer: form
+      paymentMethod,
+      customer: {
+        ...form,
+        email: loggedUser.email   // 🔥 FORCE LOGIN EMAIL
+      }
     };
 
-    // ================= COD =================
-    if (paymentMethod === "COD") {
-      await API.post("/payment/cod", orderData);
+    try {
+      if (paymentMethod === "COD") {
+        await API.post("/payment/cod", orderData);
+        clearCart();
+        navigate("/success");
+        return;
+      }
 
-      clearCart();
-      navigate("/success");
-      return;
-    }
+      if (paymentMethod === "ONLINE") {
+        const res = await API.post("/payment/razorpay", {
+          amount: total
+        });
 
-    // ================= RAZORPAY =================
-    if (paymentMethod === "ONLINE") {
-      const res = await API.post("/payment/razorpay", {
-        amount: total
-      });
+        const options = {
+          key: "YOUR_RAZORPAY_KEY",
+          amount: res.data.amount,
+          currency: "INR",
+          order_id: res.data.id,
+          handler: async function () {
+            await API.post("/payment/verify", { orderData });
+            clearCart();
+            navigate("/success");
+          },
+          theme: { color: "#6b1d00" }
+        };
 
-      const options = {
-        key: "YOUR_RAZORPAY_KEY",
-        amount: res.data.amount,
-        currency: "INR",
-        order_id: res.data.id,
-
-        handler: async function () {
-          await API.post("/payment/verify", {
-            orderData
-          });
-
-          clearCart();
-          navigate("/success");
-        },
-
-        theme: {
-          color: "#6b1d00"
-        }
-      };
-
-      const rzp = new window.Razorpay(options);
-      rzp.open();
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Order failed");
     }
   };
 
   return (
     <div className="checkout-wrapper">
-
-      {/* LEFT SIDE */}
       <div className="checkout-left">
 
         <h2>Contact</h2>
         <div className="row">
-        <input
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-          className={errors.email && "error-input"}
-        />
-        {errors.email && <p className="error-text">{errors.email}</p>}
-         </div>
+          <input
+            name="email"
+            value={form.email}
+            readOnly   // 🔥 USER CANNOT CHANGE EMAIL
+          />
+        </div>
+
         <h2>Delivery</h2>
 
         <div className="row">
@@ -126,24 +139,23 @@ export default function Checkout() {
             onChange={handleChange}
             className={errors.lastName && "error-input"}
           />
-        {/* </div> */}
-        {errors.lastName && <p className="error-text">{errors.lastName}</p>}
+          {errors.lastName && <p className="error-text">{errors.lastName}</p>}
 
-        <input
-          name="address"
-          placeholder="Address"
-          onChange={handleChange}
-          className={errors.address && "error-input"}
-        />
-        {errors.address && <p className="error-text">{errors.address}</p>}
+          <input
+            name="address"
+            placeholder="Address"
+            onChange={handleChange}
+            className={errors.address && "error-input"}
+          />
+          {errors.address && <p className="error-text">{errors.address}</p>}
 
-        {/* <div className="row"> */}
           <input
             name="city"
             placeholder="City"
             onChange={handleChange}
             className={errors.city && "error-input"}
           />
+          {errors.city && <p className="error-text">{errors.city}</p>}
 
           <input
             name="pincode"
@@ -151,52 +163,41 @@ export default function Checkout() {
             onChange={handleChange}
             className={errors.pincode && "error-input"}
           />
-        {/* </div> */}
+          {errors.pincode && <p className="error-text">{errors.pincode}</p>}
 
-        {errors.city && <p className="error-text">{errors.city}</p>}
-        {errors.pincode && <p className="error-text">{errors.pincode}</p>}
-
-        <input
-          name="phone"
-          placeholder="Phone"
-          onChange={handleChange}
-          className={errors.phone && "error-input"}
-        />
-        {errors.phone && <p className="error-text">{errors.phone}</p>}
+          <input
+            name="phone"
+            placeholder="Phone"
+            onChange={handleChange}
+            className={errors.phone && "error-input"}
+          />
+          {errors.phone && <p className="error-text">{errors.phone}</p>}
         </div>
-       <h2>Payment</h2>
 
-<div className="payment-container">
+        <h2>Payment</h2>
 
-  <div className="payment-option">
-    <span>Razorpay Secure (UPI, Cards)</span>
-    <input
-      type="radio"
-      name="payment"
-      checked={paymentMethod === "ONLINE"}
-      onChange={() => setPaymentMethod("ONLINE")}
-    />
-  </div>
+        <div className="payment-container">
+          <div className="payment-option">
+            <span>Razorpay Secure (UPI, Cards)</span>
+            <input
+              type="radio"
+              checked={paymentMethod === "ONLINE"}
+              onChange={() => setPaymentMethod("ONLINE")}
+            />
+          </div>
 
-  <div className="payment-option">
-    <span>Cash on Delivery</span>
-    <input
-      type="radio"
-      name="payment"
-      checked={paymentMethod === "COD"}
-      onChange={() => setPaymentMethod("COD")}
-    />
-  </div>
-
-</div>
-
-        
-
+          <div className="payment-option">
+            <span>Cash on Delivery</span>
+            <input
+              type="radio"
+              checked={paymentMethod === "COD"}
+              onChange={() => setPaymentMethod("COD")}
+            />
+          </div>
+        </div>
       </div>
 
-      {/* RIGHT SIDE SUMMARY */}
       <div className="checkout-right">
-
         {cart.map(item => (
           <div key={item._id} className="summary-item">
             <img src={item.image} alt="" />
@@ -214,7 +215,8 @@ export default function Checkout() {
           <h3>Total</h3>
           <h3>₹{total}</h3>
         </div>
-          <button className="pay-btn" onClick={handlePlaceOrder}>
+
+        <button className="pay-btn" onClick={handlePlaceOrder}>
           Pay Now
         </button>
       </div>

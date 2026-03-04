@@ -25,6 +25,13 @@ export default function Header() {
   const { wishlist } = useWishlist();
   const { adminToken, logout } = useAdmin();
 
+  // ✅ USER TOKEN FIX
+  const [userToken, setUserToken] = useState(localStorage.getItem("token"));
+
+  useEffect(() => {
+    setUserToken(localStorage.getItem("token"));
+  }, []);
+
   const API = import.meta.env.VITE_API_URL;
 
   const texts = [
@@ -38,6 +45,7 @@ export default function Header() {
 
   const [showShop, setShowShop] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [mobileShopOpen, setMobileShopOpen] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
   const [showSearch, setShowSearch] = useState(false);
@@ -63,7 +71,7 @@ export default function Header() {
     return () => clearInterval(timer);
   }, []);
 
-  /* 🔥 Filter while typing */
+  /* 🔥 Search filter */
   useEffect(() => {
     if (searchQuery.trim() === "") {
       setFiltered([]);
@@ -77,7 +85,7 @@ export default function Header() {
     setFiltered(result.slice(0, 6));
   }, [searchQuery, products]);
 
-  /* 🔥 Close dropdown outside click */
+  /* 🔥 Outside click close */
   useEffect(() => {
     const handleClickOutside = (event) => {
 
@@ -104,6 +112,14 @@ export default function Header() {
       setSearchQuery("");
       setFiltered([]);
     }
+  };
+
+  const handleUserLogout = () => {
+    localStorage.removeItem("token");
+     localStorage.removeItem("user");  
+    localStorage.removeItem("cart");
+    setUserToken(null);
+    navigate("/");
   };
 
   return (
@@ -143,15 +159,13 @@ export default function Header() {
             )}
           </div>
 
-          {/* <span>B2B</span>
-          <span>Blog</span> */}
-              <span onClick={() => navigate("/contact")}>Contact</span>
+          <span onClick={() => navigate("/contact")}>Contact</span>
         </nav>
 
         {/* ICONS */}
         <div className="icons">
 
-          {/* 🔍 SEARCH */}
+          {/* SEARCH */}
           <div className="search-wrapper" ref={searchRef}>
             <FiSearch
               className="icon"
@@ -198,34 +212,80 @@ export default function Header() {
 
           {/* PROFILE */}
           <div className="profile-wrapper" ref={dropdownRef}>
-            <FiUser
-              className="icon"
-              onClick={() => {
-                if (!adminToken) {
-                  navigate("/admin-login");
-                } else {
-                  setShowProfile(!showProfile);
-                }
-              }}
-            />
+  <FiUser
+    className="icon"
+    onClick={() => setShowProfile(!showProfile)}
+  />
 
-            {adminToken && showProfile && (
-              <div className="profile-dropdown">
-                <p onClick={() => navigate("/admin/dashboard")}>
-                  Dashboard
-                </p>
-                <p
-                  className="logout"
-                  onClick={() => {
-                    logout();
-                    navigate("/");
-                  }}
-                >
-                  Logout
-                </p>
-              </div>
-            )}
-          </div>
+  {showProfile && (
+    <div className="profile-dropdown">
+
+      {/* USER LOGIN */}
+     {/* PROFILE */}
+<div className="profile-wrapper" ref={dropdownRef}>
+  <FiUser
+    className="icon"
+    onClick={() => setShowProfile(!showProfile)}
+  />
+
+  {showProfile && (
+    <div className="profile-dropdown">
+
+      {/* NOT LOGGED IN */}
+      {!userToken && (
+        <p onClick={() => navigate("/login")}>
+          Login
+        </p>
+      )}
+
+      {/* USER LOGGED IN */}
+     {userToken && (
+  <>
+    <p onClick={() => {
+      navigate("/user-histor");
+      setShowProfile(false);
+    }}>
+      My Orders
+    </p>
+
+    <p
+      className="logout"
+      onClick={() => {
+        handleUserLogout();
+        setShowProfile(false);
+      }}
+    >
+      Logout
+    </p>
+  </>
+)}
+
+      {/* 🔥 ADMIN UI ONLY IF ADMIN TOKEN EXISTS */}
+      {adminToken && (
+        <>
+          <hr />
+          <p onClick={() => navigate("/admin/dashboard")}>
+            Admin Dashboard
+          </p>
+          <p
+            className="logout"
+            onClick={() => {
+              logout();
+              navigate("/");
+            }}
+          >
+            Admin Logout
+          </p>
+        </>
+      )}
+
+    </div>
+  )}
+</div>
+
+    </div>
+  )}
+</div>
 
           {/* WISHLIST */}
           <div
@@ -253,14 +313,59 @@ export default function Header() {
           </span>
         </div>
       </header>
-       {mobileMenu && (
-        <div className="mobile-menu">
-          <p onClick={() => { navigate("/"); setMobileMenu(false); }}>Home</p>
-          <p onClick={() => { navigate("/about"); setMobileMenu(false); }}>About Us</p>
-          <p onClick={() => { navigate("/shop"); setMobileMenu(false); }}>Shop</p>
-          <p onClick={() => { navigate("/contact"); setMobileMenu(false); }}>Contact</p>
-        </div>
-      )}
+
+     {mobileMenu && (
+  <div className="mobile-menu">
+
+    {/* CLOSE BUTTON */}
+    <div className="mobile-close">
+      <FiX onClick={() => {
+        setMobileMenu(false);
+        setMobileShopOpen(false);
+      }} />
+    </div>
+
+    {!mobileShopOpen ? (
+      <>
+        <p onClick={() => { navigate("/"); setMobileMenu(false); }}>
+          Home
+        </p>
+
+        <p onClick={() => { navigate("/about"); setMobileMenu(false); }}>
+          About Us
+        </p>
+
+        <p onClick={() => setMobileShopOpen(true)}>
+          Shop ▸
+        </p>
+
+        <p onClick={() => { navigate("/contact"); setMobileMenu(false); }}>
+          Contact
+        </p>
+      </>
+    ) : (
+      <>
+        <p onClick={() => setMobileShopOpen(false)}>
+          ◂ Back
+        </p>
+
+        {categories.map(cat => (
+          <p
+            key={cat._id}
+            onClick={() => {
+              navigate(`/category/${cat._id}`);
+              setMobileMenu(false);
+              setMobileShopOpen(false);
+            }}
+          >
+            {cat.name}
+          </p>
+        ))}
+      </>
+    )}
+
+  </div>
+)}
     </>
   );
 }

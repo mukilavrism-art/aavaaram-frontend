@@ -7,10 +7,21 @@ export default function MyOrders() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    API.get("/orders/my-orders")
-      .then(res => setOrders(res.data))
-      .catch(err => console.log(err));
+    fetchOrders();
   }, []);
+
+  const fetchOrders = async () => {
+    const email = localStorage.getItem("userEmail");
+
+    if (!email) return;
+
+    try {
+      const res = await API.get(`/orders/user/${email}`);
+      setOrders(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="orders-page">
@@ -22,22 +33,32 @@ export default function MyOrders() {
       {orders.map(order => (
         <div key={order._id} className="order-card">
 
-          <img src={order.products[0]?.image} alt="" />
+          {/* Use items instead of products */}
+          <img src={order.items[0]?.image} alt="" />
 
           <div className="order-info">
-            <h3>{order.products[0]?.name}</h3>
-            <p>Order ID: {order.orderId}</p>
+
+            <h3>{order.items[0]?.name}</h3>
+
+            <p>Order ID: {order._id}</p>
 
             <div className="order-meta">
               <span>₹ {order.totalAmount}</span>
-              <span>{order.date}</span>
-              <span>{order.time}</span>
+              <span>{new Date(order.createdAt).toLocaleDateString()}</span>
             </div>
 
             <div className="order-actions">
-              <button className="view-btn">View Details</button>
-              <button className="cancel-btn">Cancel Order</button>
+              <button className="view-btn">
+                View Details
+              </button>
+
+              {order.paymentStatus === "Pending" && (
+                <button className="cancel-btn">
+                  Cancel Order
+                </button>
+              )}
             </div>
+
           </div>
 
         </div>

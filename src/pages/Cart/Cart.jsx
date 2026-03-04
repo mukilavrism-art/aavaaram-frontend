@@ -32,7 +32,7 @@ export default function CartPage() {
         {/* LEFT - ITEMS */}
         <div className="cart-items">
           {cart.map((item) => (
-            <div className="cart-row" key={item.id}>
+            <div className="cart-row" key={item._id}>
               <img src={item.image} alt={item.name} />
 
               <div className="cart-details">
@@ -40,9 +40,9 @@ export default function CartPage() {
                 <p>Rs. {item.price}</p>
 
                 <div className="qty-controls">
-                  <button onClick={() => decrease(item.id)}>-</button>
+                  <button onClick={() => decrease(item._id)}>-</button>
                   <span>{item.qty}</span>
-                  <button onClick={() => increase(item.id)}>+</button>
+                  <button onClick={() => increase(item._id)}>+</button>
                 </div>
               </div>
 
@@ -52,7 +52,7 @@ export default function CartPage() {
                 </p>
                 <button
                   className="remove-btn"
-                  onClick={() => removeItem(item.id)}
+                  onClick={() => removeItem(item._id)}
                 >
                   ✕
                 </button>

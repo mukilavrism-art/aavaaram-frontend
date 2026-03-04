@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
+import "./Login.css";
+import loginImage from "../../assets/login/loginImage.jpg";
 
 export default function Login() {
 
   const [form, setForm] = useState({
     email: "",
-    password: "",
+    password: ""
   });
 
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -16,30 +19,27 @@ export default function Login() {
   const handleChange = (e) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
 
     try {
-      setLoading(true);
-
       const res = await api.post("/auth/login", form);
 
-      // ✅ Save token
+      localStorage.setItem("user", JSON.stringify(res.data.user));
       localStorage.setItem("token", res.data.token);
-
-      alert("Login successful ✅");
 
       navigate("/");
 
     } catch (err) {
-      console.log(err);
-      alert(
-        err.response?.data?.error ||
-        "Invalid email or password ❌"
+      setError(
+        err.response?.data?.message || 
+        "Invalid email or password"
       );
     } finally {
       setLoading(false);
@@ -47,47 +47,66 @@ export default function Login() {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "100px auto" }}>
-      <h2>Login</h2>
+    <div className="login-wrapper">
 
-      <form onSubmit={handleSubmit}>
+      {/* LEFT IMAGE SECTION */}
+      <div className="login-left">
+  <img
+    src={loginImage}
+    alt="Wellness"
+    className="login-image"
+  />
+</div>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter email"
-          value={form.email}
-          onChange={handleChange}
-          required
-          style={{ width: "100%", marginBottom: "15px", padding: "10px" }}
-        />
+      {/* RIGHT FORM SECTION */}
+      <div className="login-right">
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter password"
-          value={form.password}
-          onChange={handleChange}
-          required
-          style={{ width: "100%", marginBottom: "15px", padding: "10px" }}
-        />
+        <div className="login-box">
 
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            width: "100%",
-            padding: "10px",
-            background: "#6b1d00",
-            color: "#fff",
-            border: "none",
-            cursor: "pointer"
-          }}
-        >
-          {loading ? "Logging in..." : "Login"}
-        </button>
+          <h2>Welcome Back</h2>
+          <p className="subtitle">
+            Login to continue your wellness journey
+          </p>
 
-      </form>
+          <form onSubmit={handleSubmit}>
+
+            <input
+              name="email"
+              type="email"
+              placeholder="Email Address"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+
+            <button type="submit" disabled={loading}>
+              {loading ? "Signing In..." : "Sign In"}
+            </button>
+
+          </form>
+
+          {error && <p className="error">{error}</p>}
+
+          <div className="register-link">
+            Don't have an account?
+            <span onClick={() => navigate("/register")}>
+              Create Account
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }

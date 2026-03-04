@@ -1,136 +1,161 @@
-/* =========================
-   CARD CONTAINER
-==========================*/
+/* ================= CARD ================= */
 
-.modern-card {
-  background: #f3f3f3;
-  border-radius: 20px;
-  padding: 14px;
-  overflow: hidden;
+.premium-card {
+  background: #fff;
+  color: #000;
+  padding: 18px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
   transition: 0.3s ease;
 }
 
-.modern-card:hover {
-  transform: translateY(-4px);
+.premium-card:hover {
+  transform: translateY(-6px);
 }
 
-/* =========================
-   IMAGE SECTION
-==========================*/
+/* ================= IMAGE ================= */
 
-.modern-img {
+.premium-img {
   position: relative;
-  border-radius: 16px;
-  overflow: hidden;
+  cursor: pointer;
 }
 
-.modern-img img {
+.premium-img img {
   width: 100%;
-  height: 190px;   /* reduced size */
-  object-fit: cover;
-  display: block;
-  border-radius: 16px;
+  height: 260px;
+  object-fit: contain;
 }
 
-/* =========================
-   HEART ICON (TOP RIGHT)
-==========================*/
+/* ================= WISHLIST ================= */
 
 .wishlist-icon {
   position: absolute;
-  top: 10px;
+  bottom: 10px;
   right: 10px;
-  background: #ffffff;
-  padding: 6px;
+  background: #fff;
+  padding: 8px;
   border-radius: 50%;
-  font-size: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  cursor: pointer;
-  transition: 0.3s ease;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: 0.3s;
 }
 
 .wishlist-icon:hover {
   transform: scale(1.1);
 }
 
-/* =========================
-   PRODUCT INFO
-==========================*/
+/* ================= PACK ================= */
 
-.modern-info {
-  margin-top: 14px;
-}
-
-.modern-info h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #ff6a2c;
-  margin-bottom: 6px;
-}
-
-.price {
-  font-size: 16px;
-  font-weight: 700;
-  color: #5a2b1f;
-  margin-bottom: 14px;
-}
-
-/* =========================
-   BUTTON
-==========================*/
-
-.modern-actions {
+.pack-row {
   display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.pack-options span {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-}
-
-.modern-actions button {
-  width: 100%;
-  background: #8b2e0e;
-  border: none;
-  padding: 10px;
-  border-radius: 22px;
-  color: #fff;
-  font-size: 13px;
+  font-size: 12px;
   cursor: pointer;
-  transition: 0.3s ease;
 }
 
-.modern-actions button:hover {
-  background: #a83a15;
+.pack-options .active {
+  background: #000;
+  color: #161515;
 }
 
-/* =========================
-   RESPONSIVE
-==========================*/
+/* ================= RATING ================= */
 
-@media (max-width: 1024px) {
-  .modern-img img {
-    height: 170px;
-  }
+.rating-box {
+  display: inline-block;
+  /* background: #6b1d00; */
+  color: black;
+  font-size: 13px;
+  padding: 4px 8px;
+  margin-top: 10px;
+  
+  
 }
+
+/* ================= TITLE ================= */
+
+.premium-card h3 {
+  font-size: 15px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+/* ================= TAGS ================= */
+
+.tag-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+font-weight: 400;
+}
+
+.tag-row span {
+  background: #dbdada;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+/* ================= PRICE ================= */
+
+.price-row {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.new-price {
+  font-weight: bold;
+  font-size: 16px;
+  color: #000;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #777;
+  font-size: 14px;
+}
+
+.save {
+  color: #0b6b3a;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ================= BUTTON ================= */
+
+.cart-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.cart-btn:hover {
+  background: #333;
+}
+
+/* ================= RESPONSIVE ================= */
 
 @media (max-width: 768px) {
-
-  .modern-card {
-    padding: 10px;
-    border-radius: 16px;
-  }
-
-  .modern-img img {
-    height: 150px;
-  }
-
-  .modern-info h3 {
-    font-size: 14px;
-  }
-
-  .price {
-    font-size: 14px;
-  }
-
-  .modern-actions button {
-    padding: 8px;
-    font-size: 12px;
+  .premium-img img {
+    height: 200px;
   }
 }

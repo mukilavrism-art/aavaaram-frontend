@@ -2,6 +2,9 @@ import "./TimelessDelights.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+import timelessImg from "../../assets/timeless.jpg";
+import badgeImg from "../../assets/badge.jpg";
+
 export default function TimelessDelights() {
   const navigate = useNavigate();
   const [playVideo, setPlayVideo] = useState(false);
@@ -13,10 +16,15 @@ export default function TimelessDelights() {
 
           {/* LEFT CONTENT */}
           <div className="timeless-left">
-            <h2>Timeless Delights</h2>
+            <h2>
+              Timeless Wellness,<br />
+              Trusted for Generations
+            </h2>
+
             <p>
-              A taste of India's heritage in every<br />
-              sweet and savoury.
+              Inspired by India’s rich herbal heritage, Aavaaram blends tradition with innovation.
+              Our mission is simple — deliver pure, effective and responsibly crafted wellness
+              solutions for today’s generation.
             </p>
 
             <button onClick={() => navigate("/about")}>
@@ -28,7 +36,7 @@ export default function TimelessDelights() {
           <div className="timeless-right">
             <div className="video-box">
               <img
-                src="https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=800"
+                src={timelessImg}
                 alt="Timeless Delight"
               />
 
@@ -42,7 +50,7 @@ export default function TimelessDelights() {
 
             <div className="badge-box">
               <img
-                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=400"
+                src={badgeImg}
                 alt="Since 1914"
               />
             </div>
@@ -51,7 +59,7 @@ export default function TimelessDelights() {
         </div>
       </section>
 
-      {/* 🔥 VIDEO MODAL */}
+      {/* VIDEO MODAL */}
       {playVideo && (
         <div className="video-modal">
           <div className="video-container">
@@ -63,7 +71,7 @@ export default function TimelessDelights() {
             </span>
 
             <video
-              src="/videos/your-video.mp4"   // 🔥 ADD YOUR VIDEO HERE
+              src="/videos/your-video.mp4"
               controls
               autoPlay
             />

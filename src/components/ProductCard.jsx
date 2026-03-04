@@ -11,38 +11,75 @@ export default function ProductCard({ product }) {
 
   const liked = isInWishlist(product._id);
 
-  return (
-    <div className="modern-card">
+  const handleAddToCart = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+    addToCart(product);
+  };
 
-      {/* IMAGE SECTION */}
+  return (
+    <div className="premium-card">
+
+      {/* IMAGE */}
       <div
-        className="modern-img"
+        className="premium-img"
         onClick={() => navigate(`/product/${product._id}`)}
       >
         <img src={product.image} alt={product.name} />
 
-        {/* ❤️ HEART MOVED HERE */}
         <FaHeart
           className="wishlist-icon"
           onClick={(e) => {
-            e.stopPropagation();   // prevent image click
+            e.stopPropagation();
             toggleWishlist(product);
           }}
-          color={liked ? "red" : "#888"}
+          color={liked ? "red" : "#999"}
         />
       </div>
 
-      {/* INFO SECTION */}
-      <div className="modern-info">
-        <h3>{product.name}</h3>
-        <p className="price">₹ {product.price}</p>
-
-        <div className="modern-actions">
-          <button onClick={() => addToCart(product)}>
-            Add To Cart
-          </button>
+      {/* PACK OPTIONS */}
+      {/* <div className="pack-row">
+        <span>Pack:</span>
+        <div className="pack-options">
+          <span className="active">1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>4</span>
         </div>
+      </div> */}
+
+      {/* RATING */}
+      <div className="rating-box">
+        ⭐ {product.averageRating?.toFixed(1) || "4.8"}/5
+        {" "}
+        ({product.reviews?.length || 360})
       </div>
+
+      {/* TITLE */}
+      <h3 onClick={() => navigate(`/product/${product._id}`)}>
+        {product.name}
+      </h3>
+
+      {/* TAGS (static for now) */}
+      <div className="tag-row">
+        <span>Skin Radiance</span>
+        <span>Pigmentation</span>
+      </div>
+
+      {/* PRICE */}
+      <div className="price-row">
+        <span className="new-price">₹{product.price}</span>
+        <span className="old-price">₹{product.price + 100}</span>
+        <span className="save">Save 5%</span>
+      </div>
+
+      {/* BUTTON */}
+      <button className="cart-btn" onClick={handleAddToCart}>
+        Add to Cart
+      </button>
 
     </div>
   );

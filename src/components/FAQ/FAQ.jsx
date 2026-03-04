@@ -6,24 +6,24 @@ export default function FAQ() {
 
   const faqs = [
     {
-      question: "Our Journey",
+      question: "Are Aavaaram supplements safe for daily use?",
       answer:
-        "We started with a mission to deliver natural and sustainable superfoods to every household."
+        "Yes, our products are made using standardized herbal extracts and are safe when consumed as per recommended dosage."
     },
     {
-      question: "Being Unique!!!",
+      question: "Do your products contain preservatives or artificial additives?",
       answer:
-        "Our uniqueness lies in combining traditional knowledge with modern food science."
+        "No. We focus on clean formulations without unnecessary fillers or harmful chemicals."
     },
     {
-      question: "We Indulge in Offering",
+      question: "How long does it take to see results?",
       answer:
-        "We offer premium quality, organic, and carefully processed natural products."
+        "Results may vary depending on individual health conditions. Consistent use as advised typically shows noticeable improvements within a few weeks."
     },
     {
-      question: "We made it simple for you!!!",
+      question: "Are your supplements vegetarian?",
       answer:
-        "From farm to doorstep, we ensure smooth sourcing, processing, and delivery."
+        "Yes, all our capsules are 100% vegetarian."
     }
   ];
 

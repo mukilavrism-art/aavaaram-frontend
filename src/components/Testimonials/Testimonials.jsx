@@ -29,19 +29,19 @@ export default function Testimonials() {
 
   const reviews = [
     {
-      text: "Everything I ordered on 21-12-24, all the items both sweets and karams are exceedingly good. Fresh, delicious.",
+      text: "Excellent quality supplements. I’ve noticed real improvement in digestion and energy levels. Highly recommended.!",
       name: "Jayaraman Arumugadoss",
     },
     {
-      text: "For the past 2 years I am buying Sattur mittai kadai products for every occasion. Very tasty and delicious. Packing also so good.",
-      name: "Mangaiyarkarasi Ravirajan",
+      text: "Nice products good for health.",
+      name: "Satheesh Kumar",
     },
     {
-      text: "Prompt delivery. Tasty items. Wish to have an outlet at Medahalli in Bengaluru.",
+      text: "Prompt delivery and premium packaging. The herbal formulations feel authentic and effective.",
       name: "Shanmugiah Arumugam",
     },
     {
-      text: "Quality maintained for generations. Taste remains unchanged.",
+      text: "Consistent quality and trustworthy brand. Aavaaram has become part of my daily routine.",
       name: "Lakshmi Narayanan",
     },
   ];
@@ -49,7 +49,7 @@ export default function Testimonials() {
   return (
     <section className="testimonials">
       <h2>Our Customer Love Us</h2>
-      <p>Your feedback helps us improve – we’d love to hear from you!</p>
+      <p>Real experiences. Genuine results. Trusted wellness.</p>
 
       <div className="slider-wrapper">
         <button className="nav left" onClick={() => scroll("left")}>‹</button>

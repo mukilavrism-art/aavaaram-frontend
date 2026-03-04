@@ -1,0 +1,101 @@
+/* BACKGROUND */
+
+.register-container {
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #fdf7f2,
+    #f2e6da,
+    #f8efe8
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* CARD */
+
+.register-card {
+  width: 100%;
+  max-width: 460px;
+  background: white;
+  padding: 45px;
+  border-radius: 30px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+  transition: 0.3s ease;
+}
+
+.register-card:hover {
+  transform: translateY(-6px);
+}
+
+/* TITLE */
+
+.register-card h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #7a2e00;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 30px;
+}
+
+/* ANT INPUT CUSTOM */
+
+.ant-input,
+.ant-input-password {
+  border-radius: 25px !important;
+  height: 45px;
+}
+
+.ant-input:focus,
+.ant-input-password:focus {
+  border-color: #a4b72f !important;
+  box-shadow: 0 0 0 2px rgba(164,183,47,0.2) !important;
+}
+
+/* BUTTON */
+
+.register-btn {
+  height: 48px;
+  border-radius: 30px !important;
+  background: #7a2e00 !important;
+  border: none !important;
+  font-weight: 600;
+  font-size: 15px;
+  transition: 0.3s ease;
+}
+
+.register-btn:hover {
+  background: #5c2200 !important;
+}
+
+/* LOGIN LINK */
+
+.login-link {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 14px;
+}
+
+.login-link span {
+  color: #7a2e00;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+  .register-card {
+    padding: 30px;
+    border-radius: 20px;
+  }
+}

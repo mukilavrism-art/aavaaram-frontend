@@ -10,8 +10,9 @@
 /* TOP GRID */
 .footer-top {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 40px;
+  grid-template-columns: 1.3fr 1fr 1fr 1.2fr;
+  gap: 50px;
+  align-items: flex-start;
 }
 
 .footer-col h4 {
@@ -121,8 +122,8 @@
 }
 
 .social-icons svg {
-  width: 34px;
-  height: 34px;
+  width: 14px;
+  height: 14px;
   padding: 8px;
   background: #ffffff;
   border-radius: 50%;

@@ -61,13 +61,21 @@ export default function CategoryPage() {
             </h3>
 
             <p className="price">₹ {p.price}</p>
+<button
+  className="cart-btn"
+  onClick={() => {
+  const token = localStorage.getItem("token");
+  console.log("Token:", token);
 
-            <button
-              className="cart-btn"
-              onClick={() => addToCart(p)}
-            >
-              Add To Cart
-            </button>
+  if (!token) {
+    navigate("/login");
+  } else {
+    addToCart(p);
+  }
+}}
+>
+  Add To Cart
+</button>
 
           </div>
         ))}

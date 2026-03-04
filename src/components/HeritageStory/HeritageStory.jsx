@@ -21,17 +21,13 @@ export default function HeritageStory() {
 
         {/* RIGHT CONTENT */}
         <div className="heritage-content">
-          <h2 className="script-title">Taste and Quality carried over generations!</h2>
+          <h2 className="script-title">A Legacy of Quality, Carried Forward with Care</h2>
           <p>
-            Mittai Kadai has stood the testament of time by consistently
-            providing quality and taste. Currently run by the fourth
-            generation, the Mittai Kadai has lived up to the expectations
-            of our clients through fresh, healthy and delightful snacks
-            and sweets.
+           For generations, we have believed in the healing power of nature. Today, we continue that legacy with advanced research, ethical sourcing, and uncompromising quality standards. Every product reflects our dedication to authenticity, purity, and trust.
           </p>
 
           <button className="story-btn" onClick={() => navigate("/about")}>
-            Our Story
+            Discover Our Journey
           </button>
         </div>
 

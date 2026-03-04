@@ -16,28 +16,18 @@ export default function Footer() {
             Crafted with love, purity and generations of expertise.
           </p>
 
-          <div className="social-icons">
+          {/* <div className="social-icons">
             <FaFacebookF />
             <FaInstagram />
             <FaYoutube />
-          </div>
+          </div> */}
         </div>
 
         {/* SAVOURIES */}
-        <div className="footer-col">
-          <h4>Savouries</h4>
-          <ul>
-            <li>Sev</li>
-            <li>Seeval</li>
-            <li>Mixture</li>
-            <li>Murukku</li>
-            <li>Fried Nuts</li>
-            <li>Chips</li>
-          </ul>
-        </div>
+      
 
         {/* SWEETS */}
-        <div className="footer-col">
+        {/* <div className="footer-col">
           <h4>Sweets</h4>
           <ul>
             <li>Mittai</li>
@@ -47,31 +37,48 @@ export default function Footer() {
             <li>Jangiri</li>
             <li>Halwa</li>
           </ul>
-        </div>
+        </div> */}
 
         {/* INFORMATION */}
         <div className="footer-col">
           <h4>Information</h4>
           <ul>
+            <li>Home</li>
             <li>About Us</li>
             <li>Terms & Conditions</li>
             <li>Privacy Policy</li>
             <li>Delivery & Shipping</li>
-            <li>Return Policy</li>
-            <li>Sitemap</li>
+            
+            {/* <li>Sitemap</li> */}
           </ul>
+        </div>
+          <div className="footer-col">
+          <h4>Factory:</h4>
+          <p>
+            Nilakottai, Dindigul District,<br />
+           Tamil Nadu - 624201<br />
+          </p>
+          <p className="phone">📞 +91 63812 52790</p>
         </div>
 
         {/* CONTACT */}
         <div className="footer-col">
           <h4>Contact Us</h4>
+          <h5>SRG SUPER FOODS INDIA PVT LTD</h5>
           <p>
-            No 77, Pillayar Kovil Street,<br />
-            Sattur - 626203,<br />
-            Virudhunagar District,<br />
+            No.152B, Pillaiyar Koil Street,<br />
+           Mogappair East,<br />
+            Chennai - 600037<br />
             Tamilnadu, India.
           </p>
-          <p className="phone">📞 +91 95009 93465</p>
+          <p>📧 feedback@aavaaram.com</p>
+          <p className="phone">📞 +91 98846 57975 / ☎ 044 4285 5055</p>
+          
+          <div className="social-icons">
+            <FaFacebookF />
+            <FaInstagram />
+            <FaYoutube />
+          </div>
         </div>
 
       </div>

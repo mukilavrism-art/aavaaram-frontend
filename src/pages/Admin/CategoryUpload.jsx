@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FiMoreVertical } from "react-icons/fi";
 import API from "../../services/api";
 import "./CategoryUpload.css";
 
@@ -6,6 +7,7 @@ export default function CategoryUpload() {
   const [categories, setCategories] = useState([]);
   const [open, setOpen] = useState(false);
   const [editId, setEditId] = useState(null);
+  const [activeMenu, setActiveMenu] = useState(null);
 
   const [form, setForm] = useState({
     name: "",
@@ -105,21 +107,39 @@ export default function CategoryUpload() {
 
               <td>{c.name}</td>
 
-              <td className="action-buttons">
-                <button
-                  className="edit-btn"
-                  onClick={() => editCategory(c)}
-                >
-                  ✏
-                </button>
+              <td className="action-buttons" style={{ position: "relative" }}>
 
-                <button
-                  className="delete-btn"
-                  onClick={() => removeCategory(c._id)}
-                >
-                  ✖
-                </button>
-              </td>
+  <button
+    className="three-dot-btn"
+    onClick={() =>
+      setActiveMenu(activeMenu === c._id ? null : c._id)
+    }
+  >
+    <FiMoreVertical />
+  </button>
+
+  {activeMenu === c._id && (
+    <div className="action-dropdown">
+      <p onClick={() => {
+        editCategory(c);
+        setActiveMenu(null);
+      }}>
+        Edit
+      </p>
+
+      <p
+        className="delete-text"
+        onClick={() => {
+          removeCategory(c._id);
+          setActiveMenu(null);
+        }}
+      >
+        Delete
+      </p>
+    </div>
+  )}
+
+</td>
             </tr>
           ))}
         </tbody>

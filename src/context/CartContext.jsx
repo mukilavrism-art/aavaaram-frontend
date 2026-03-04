@@ -1,74 +1,80 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import api from "../services/api";
 
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
 
-  const [cart, setCart] = useState(() => {
-    const saved = localStorage.getItem("cart");
-    return saved ? JSON.parse(saved) : [];
-  });
-
+  const [cart, setCart] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  /* SAVE TO LOCALSTORAGE */
+  const token = localStorage.getItem("token");
+
+  // ✅ FETCH CART FROM DATABASE
+  const fetchCart = async () => {
+    try {
+      if (!token) return;
+
+      const res = await api.get("/cart", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setCart(res.data?.items || []);
+
+    } catch (error) {
+      console.error("FETCH CART ERROR:", error);
+    }
+  };
+
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+    fetchCart();
+  }, []);
 
-  /* ADD TO CART */
-  const addToCart = (product) => {
-    setCart(prev => {
-      const exist = prev.find(item => item._id === product._id);
+  // ✅ ADD TO CART (DB)
+  const addToCart = async (product) => {
+    if (!token) {
+      window.location.href = "/login";
+      return;
+    }
 
-      if (exist) {
-        return prev.map(item =>
-          item._id === product._id
-            ? { ...item, qty: item.qty + 1 }
-            : item
-        );
-      }
+    try {
+      await api.post(
+        "/cart/add",
+        { productId: product._id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      return [...prev, { ...product, qty: 1 }];
-    });
+      await fetchCart();
+      setIsOpen(true);
 
-    setIsOpen(true);
+    } catch (error) {
+      console.error("ADD CART ERROR:", error);
+    }
   };
 
-  const removeItem = (id) => {
-    setCart(prev => prev.filter(item => item._id !== id));
-  };
+  // ✅ REMOVE ITEM (optional – if backend API add pannina)
+  const removeItem = async (productId) => {
+    try {
+      await api.delete(`/cart/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-  const increase = (id) => {
-    setCart(prev =>
-      prev.map(item =>
-        item._id === id
-          ? { ...item, qty: item.qty + 1 }
-          : item
-      )
-    );
-  };
-
-  const decrease = (id) => {
-    setCart(prev =>
-      prev
-        .map(item =>
-          item._id === id
-            ? { ...item, qty: item.qty - 1 }
-            : item
-        )
-        .filter(item => item.qty > 0)
-    );
-  };
-
-  /* ✅ ADD THIS FUNCTION */
-  const clearCart = () => {
-    setCart([]);
-    localStorage.removeItem("cart");
+      fetchCart();
+    } catch (error) {
+      console.error("REMOVE CART ERROR:", error);
+    }
   };
 
   const total = cart.reduce(
-    (acc, item) => acc + item.price * item.qty,
+    (acc, item) => acc + (item.product?.price || 0) * item.qty,
     0
   );
 
@@ -78,13 +84,10 @@ export function CartProvider({ children }) {
         cart,
         addToCart,
         removeItem,
-        increase,
-        decrease,
         total,
         isOpen,
         openCart: () => setIsOpen(true),
         closeCart: () => setIsOpen(false),
-        clearCart   // ✅ EXPORT IT
       }}
     >
       {children}

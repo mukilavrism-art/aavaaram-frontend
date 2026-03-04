@@ -35,11 +35,11 @@
 }
 
 .timeless-left h2 {
-  font-size: 52px;
-  font-family: "Playfair Display", serif;
+  font-size: 48px;
+  line-height: 1.2;
+  max-width: 520px;
   font-weight: 500;
   color: #5b2b00;
-  margin-bottom: 18px;
 }
 
 .timeless-left p {
@@ -161,9 +161,10 @@
     padding: 70px 20px;
   }
 
-  .timeless-left h2 {
-    font-size: 40px;
+   .timeless-left h2 {
+    font-size: 32px;
   }
+
 
   .timeless-left p {
     font-size: 18px;

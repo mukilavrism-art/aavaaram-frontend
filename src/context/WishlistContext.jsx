@@ -1,57 +1,69 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import api from "../services/api";
 
 const WishlistContext = createContext();
 
 export function WishlistProvider({ children }) {
 
-  const [wishlist, setWishlist] = useState(() => {
+  const [wishlist, setWishlist] = useState([]);
+  const token = localStorage.getItem("token");
+
+  // ✅ FETCH WISHLIST
+  const fetchWishlist = async () => {
     try {
-      const saved = localStorage.getItem("wishlist");
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
+      if (!token) return;
+
+      const res = await api.get("/wishlist", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setWishlist(res.data?.products || []);
+
+    } catch (error) {
+      console.error("FETCH WISHLIST ERROR:", error);
     }
-  });
+  };
 
-  // Save to localStorage
   useEffect(() => {
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
-  }, [wishlist]);
+    fetchWishlist();
+  }, []);
 
-  // 🔥 Toggle Add / Remove
-  const toggleWishlist = (product) => {
-    if (!product || !product._id) return;
+  // ✅ TOGGLE
+  const toggleWishlist = async (product) => {
+    if (!token) {
+      window.location.href = "/login";
+      return;
+    }
 
-    setWishlist((prev) => {
-      const exists = prev.some(item => item._id === product._id);
+    try {
+      await api.post(
+        "/wishlist/toggle",
+        { productId: product._id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      if (exists) {
-        return prev.filter(item => item._id !== product._id);
-      } else {
-        return [...prev, product];
-      }
-    });
+      fetchWishlist();
+
+    } catch (error) {
+      console.error("TOGGLE WISHLIST ERROR:", error);
+    }
   };
 
-  // Remove explicitly
-  const removeFromWishlist = (id) => {
-    setWishlist((prev) =>
-      prev.filter(item => item._id !== id)
-    );
-  };
-
-  // Check if exists
-  const isInWishlist = (id) => {
-    return wishlist.some(item => item._id === id);
-  };
+  const isInWishlist = (id) =>
+    wishlist.some((item) => item._id === id);
 
   return (
     <WishlistContext.Provider
       value={{
         wishlist,
         toggleWishlist,
-        removeFromWishlist,
-        isInWishlist
+        isInWishlist,
       }}
     >
       {children}
